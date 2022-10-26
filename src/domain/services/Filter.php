@@ -12,17 +12,27 @@ class Filter extends Task
         forEach($projects as $project) {
             $bestSuccessor = [];
             if (array_key_exists("successors", $project)) {
+                $bestSuccessor = $this->getBestSuccessor(
+                    $project["rootProject"]["profitability"],
+                    $project["successors"]
+                )
+                ;
+                $successorProfitability = !empty($bestSuccessor)
+                    ? $bestSuccessor["profitability"]
+                    : 0
+                ;
                 $bestSuccessor = [
                     "rootProject" => $project["rootProject"],
-                    "successor" => $this->getBestSuccessor(
-                        $project["rootProject"]["profitability"],
-                        $project["successors"]
-                    )
+                    "successor" => $bestSuccessor,
+                    "maximumProfitability" => $project["rootProject"]["profitability"] +
+                                            $successorProfitability
                 ];
+
             }
             $bestSuccessors[] = $bestSuccessor;
 
         }
+
         return parent::execute($bestSuccessors);
     }
 

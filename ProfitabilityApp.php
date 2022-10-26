@@ -6,7 +6,6 @@ namespace Profitability\application;
 
 require './vendor/autoload.php';
 
-use Profitability\domain\concepts\Handler;
 use Profitability\domain\services\Analyzer;
 use Profitability\domain\services\Filter;
 use Profitability\domain\services\Formatter;
@@ -20,11 +19,11 @@ $sorter = new Sorter();
 $combinator = new GeneratorCombinations();
 $filter = new Filter();
 $analyzer = new Analyzer();
+$formatter = new Formatter();
 
-$sorter->linkedWith($combinator)->linkedWith($filter)->linkedWith($analyzer);
+$sorter->linkedWith($combinator)->linkedWith($filter)->linkedWith($analyzer)->linkedWith($formatter);
 
-$sorter->execute($projects);
+$theBestRoadmap = $sorter->execute($projects);
 
-
-//echo "The best combination is:\n" . json_encode($projects);
+var_dump($theBestRoadmap);
 
