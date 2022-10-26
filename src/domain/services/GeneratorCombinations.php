@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Profitability\domain\services;
 
-use DateTimeImmutable;
-use Profitability\domain\abstractions\Handler;
 use Profitability\domain\abstractions\Task;
 
 class GeneratorCombinations extends Task {

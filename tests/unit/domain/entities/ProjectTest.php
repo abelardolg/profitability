@@ -107,7 +107,6 @@ class ProjectTest extends TestCase
         $startDate =DateVO::fromDate("2022/02/02");
         $endDate =DateVO::fromDate("2022/02/28");
 
-
         $this->expectException(ValueNotAllowedException::class);
 
         Project::fromProject(
