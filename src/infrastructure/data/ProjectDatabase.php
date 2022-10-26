@@ -41,7 +41,7 @@ class ProjectDatabase
             Project::fromProject(
                 StringVO::fromString("MIJAS"),
                 DateVo::fromDate("2022/01/15"),
-                DateVo::fromDate("2022/01/31"),
+                DateVo::fromDate("2022/01/20"),
                 Profitability::fromAmount(18000)
             )->toArray(),
             Project::fromProject(

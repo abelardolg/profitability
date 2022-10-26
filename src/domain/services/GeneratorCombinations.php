@@ -10,32 +10,31 @@ use Profitability\domain\abstractions\Task;
 
 class GeneratorCombinations extends Task {
 
-    private array $sortedProjects;
-
     public function execute(array $projects): array {
-        $this->sortedProjects = $projects;
         echo("generate combinations\n");
         $combinations = [];
-        forEach($projects as $project) {
-            $combinations[] = $this->getProjectsThatRunsAfterOfThisDate($project, $project["endDate"]);
+        forEach($projects as $rootProject) {
+            $combinations[] = [
+                "rootProject" => $rootProject,
+                "successors" => $this->getProjectsThatRunsAfterOfThisDate($rootProject, $projects)
+            ];
         }
 
         return parent::execute($combinations);
     }
 
-    private function getProjectsThatRunsAfterOfThisDate(array $rootProject, int $endDate): array
+    private function getProjectsThatRunsAfterOfThisDate(array $rootProject, array $projects): array
     {
-        $projectsAfterOfThisDate = [
-            "rootProject" => $rootProject
-        ];
-        forEach($this->sortedProjects as $project) {
-            $addedSuccessor = [];
-            if ($project["startDate"] >= $endDate &&
-                $project["id"] !== $rootProject["id"]) {
-                $projectsAfterOfThisDate["successors"][] = $project;
-            }
+        $projectsAfterOfThisDate = [];
 
+        forEach($projects as $project) {
+            if ($project["id"] !== $rootProject["id"] &&
+                $project["startDate"] >= $rootProject["endDate"]
+                ) {
+                $projectsAfterOfThisDate[] = $project;
+            }
         }
+
         return $projectsAfterOfThisDate;
     }
 
