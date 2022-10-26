@@ -7,11 +7,12 @@ It takes several projects with these pieces of information:
   * profitability;
   
 and it analyzes what is the best roadmap (combination of projects) to get the best profitability of them.
-## Constraints:
+
+## Constraints
   * A project should run per time. Overlapped projects are not considered.
   * When a project finishes a day, another project could run with 100% of the available resources that same day.
 
-## How to run it:
+## How to run it
 Follow these steps to run this project:
 * Go to root folder of this project;
 * Run the following command:
