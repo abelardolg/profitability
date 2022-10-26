@@ -27,3 +27,7 @@ The following improvements could be applied to this project:
   * By using recursion instead of current iterative approach the complexity of these algorithms could be dramatically decreased.
 * Several pieces of this chain could be named more precise than used ones.
 * By adding logs could be handy in order to obtain valuable information about the process.
+
+## Tests
+To run the tests, please execute the following command under the root dir:
+* ``` php ./vendor/bin/phpunit --verbose tests ```

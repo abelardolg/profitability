@@ -16,7 +16,6 @@ class AppTest extends TestCase
      */
     public function testProjectsWhenBThenA()
     {
-
         $sorter = new Sorter();
         $combinator = new GeneratorCombinations();
         $filter = new Filter();
@@ -156,7 +155,6 @@ class AppTest extends TestCase
         $formatter = new Formatter();
 
         $sorter->linkedWith($combinator)->linkedWith($filter)->linkedWith($analyzer)->linkedWith($formatter);
-
 
         $projects = [];
 
