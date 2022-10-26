@@ -50,7 +50,7 @@ class DateVO
 
         try{
             $this->value = new DateTimeImmutable($value);
-        } catch(Exception $ex) {
+        } catch(Exception) {
             throw new ValueNotAllowedException();
         }
 

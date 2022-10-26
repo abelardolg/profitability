@@ -43,7 +43,7 @@ class StringVO
      */
     public function setValue(string $value): void
     {
-        if (empty($value))
+        if (preg_match("/^[0-9]+$/", $value) || empty($value))
             throw ValueNotAllowedException::fromValue();
 
         $this->value = $value;
