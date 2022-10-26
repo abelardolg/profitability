@@ -7,7 +7,10 @@ use Profitability\domain\abstractions\Task;
 class Sorter extends Task
 {
     public function execute(array $projects): array {
-        usort($projects, array($this, "compare"));
+        if (!empty($projects)) {
+            usort($projects, array($this, "compare"));
+        }
+
         return parent::execute($projects);
     }
 

@@ -8,27 +8,29 @@ class Filter extends Task
 {
     public function execute(array $projects): array {
         $bestSuccessors = [];
-        forEach($projects as $project) {
-            $bestSuccessor = [];
-            if (array_key_exists("successors", $project)) {
-                $bestSuccessor = $this->getBestSuccessor(
-                    $project["rootProject"]["profitability"],
-                    $project["successors"]
-                )
-                ;
-                $successorProfitability = !empty($bestSuccessor)
-                    ? $bestSuccessor["profitability"]
-                    : 0
-                ;
-                $bestSuccessor = [
-                    "rootProject" => $project["rootProject"],
-                    "successor" => $bestSuccessor,
-                    "maximumProfitability" => $project["rootProject"]["profitability"] +
-                                            $successorProfitability
-                ];
+        if (!empty($projects)) {
+            forEach($projects as $project) {
+                $bestSuccessor = [];
+                if (array_key_exists("successors", $project)) {
+                    $bestSuccessor = $this->getBestSuccessor(
+                        $project["rootProject"]["profitability"],
+                        $project["successors"]
+                    )
+                    ;
+                    $successorProfitability = !empty($bestSuccessor)
+                        ? $bestSuccessor["profitability"]
+                        : 0
+                    ;
+                    $bestSuccessor = [
+                        "rootProject" => $project["rootProject"],
+                        "successor" => $bestSuccessor,
+                        "maximumProfitability" => $project["rootProject"]["profitability"] +
+                                                $successorProfitability
+                    ];
 
+                }
+                $bestSuccessors[] = $bestSuccessor;
             }
-            $bestSuccessors[] = $bestSuccessor;
         }
 
         return parent::execute($bestSuccessors);

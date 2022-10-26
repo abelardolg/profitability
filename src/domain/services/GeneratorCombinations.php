@@ -12,11 +12,14 @@ class GeneratorCombinations extends Task {
 
     public function execute(array $projects): array {
         $combinations = [];
-        forEach($projects as $rootProject) {
-            $combinations[] = [
-                "rootProject" => $rootProject,
-                "successors" => $this->getProjectsThatRunsAfterOfThisDate($rootProject, $projects)
-            ];
+
+        if (!empty($projects)) {
+            forEach($projects as $rootProject) {
+                $combinations[] = [
+                    "rootProject" => $rootProject,
+                    "successors" => $this->getProjectsThatRunsAfterOfThisDate($rootProject, $projects)
+                ];
+            }
         }
 
         return parent::execute($combinations);
