@@ -20,7 +20,7 @@ Follow these steps to run this project:
 
 Happy run! :)
 
-# Improvements
+## Improvements
 The following improvements could be applied to this project:
 * By using a graph with deep-first search would be more efficient;
 * Currently, the complexity of this algorithm is O(N^2) in all cases (best, middle and worst cases):
@@ -29,5 +29,5 @@ The following improvements could be applied to this project:
 * By adding logs could be handy in order to obtain valuable information about the process.
 
 
-# To-do
+## To-do
 * Tests
