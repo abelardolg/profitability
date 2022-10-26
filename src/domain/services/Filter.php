@@ -7,7 +7,6 @@ use Profitability\domain\abstractions\Task;
 class Filter extends Task
 {
     public function execute(array $projects): array {
-        echo("filter\n");
         $bestSuccessors = [];
         forEach($projects as $project) {
             $bestSuccessor = [];
@@ -30,7 +29,6 @@ class Filter extends Task
 
             }
             $bestSuccessors[] = $bestSuccessor;
-
         }
 
         return parent::execute($bestSuccessors);

@@ -11,7 +11,6 @@ use Profitability\domain\abstractions\Task;
 class GeneratorCombinations extends Task {
 
     public function execute(array $projects): array {
-        echo("generate combinations\n");
         $combinations = [];
         forEach($projects as $rootProject) {
             $combinations[] = [
@@ -30,13 +29,12 @@ class GeneratorCombinations extends Task {
         forEach($projects as $project) {
             if ($project["id"] !== $rootProject["id"] &&
                 $project["startDate"] >= $rootProject["endDate"]
-                ) {
+            ) {
                 $projectsAfterOfThisDate[] = $project;
             }
         }
 
         return $projectsAfterOfThisDate;
     }
-
 
 }
