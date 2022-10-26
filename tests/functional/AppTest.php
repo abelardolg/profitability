@@ -1,19 +1,21 @@
 <?php
 
+namespace functional;
+
 use PHPUnit\Framework\TestCase;
 use Profitability\domain\services\Analyzer;
 use Profitability\domain\services\Filter;
 use Profitability\domain\services\Formatter;
 use Profitability\domain\services\GeneratorCombinations;
 use Profitability\domain\services\Sorter;
-use Profitability\infrastructure\data\ProjectDatabase;
 
 class AppTest extends TestCase
 {
     /**
      * @test
      */
-    public function testProjectsWhenBThenA() {
+    public function testProjectsWhenBThenA()
+    {
 
         $sorter = new Sorter();
         $combinator = new GeneratorCombinations();
@@ -26,26 +28,26 @@ class AppTest extends TestCase
 
         $projects = [
             [
-                "id"                =>  "747715fa-7764-46e8-a4a7-0ea7e0534edc",
-                "name"              =>  "ProjectA",
-                "startDate"         =>  1642201200,
-                "endDate"           =>  1642201300,
-                "profitability"     =>  14000
+                "id" => "747715fa-7764-46e8-a4a7-0ea7e0534edc",
+                "name" => "ProjectA",
+                "startDate" => 1642201200,
+                "endDate" => 1642201300,
+                "profitability" => 14000
             ],
             [
-                "id"                =>  "747715fa-7764-46e8-a4a7-0ea7e0534ed1",
-                "name"              =>  "ProjectB",
-                "startDate"         =>  1642201100,
-                "endDate"           =>  1642201200,
-                "profitability"     =>  14000
+                "id" => "747715fa-7764-46e8-a4a7-0ea7e0534ed1",
+                "name" => "ProjectB",
+                "startDate" => 1642201100,
+                "endDate" => 1642201200,
+                "profitability" => 14000
             ]
         ];
 
         $result =
             [
-                "from" =>           "ProjectB",
-                "to" =>             "ProjectA",
-                "profitability" =>  28000
+                "from" => "ProjectB",
+                "to" => "ProjectA",
+                "profitability" => 28000
             ];
 
         $expectedSortedProjects = $sorter->execute($projects);
@@ -56,7 +58,8 @@ class AppTest extends TestCase
     /**
      * @test
      */
-    public function testProjectsWhenOverlappingProjects() {
+    public function testProjectsWhenOverlappingProjects()
+    {
 
         $sorter = new Sorter();
         $combinator = new GeneratorCombinations();
@@ -69,26 +72,26 @@ class AppTest extends TestCase
 
         $projects = [
             [
-                "id"                =>  "747715fa-7764-46e8-a4a7-0ea7e0534edc",
-                "name"              =>  "ProjectA",
-                "startDate"         =>  1642201100,
-                "endDate"           =>  1642201300,
-                "profitability"     =>  12000
+                "id" => "747715fa-7764-46e8-a4a7-0ea7e0534edc",
+                "name" => "ProjectA",
+                "startDate" => 1642201100,
+                "endDate" => 1642201300,
+                "profitability" => 12000
             ],
             [
-                "id"                =>  "747715fa-7764-46e8-a4a7-0ea7e0534ed1",
-                "name"              =>  "ProjectB",
-                "startDate"         =>  1642201200,
-                "endDate"           =>  1642201400,
-                "profitability"     =>  14000
+                "id" => "747715fa-7764-46e8-a4a7-0ea7e0534ed1",
+                "name" => "ProjectB",
+                "startDate" => 1642201200,
+                "endDate" => 1642201400,
+                "profitability" => 14000
             ]
         ];
 
         $result =
             [
-                "from" =>           "ProjectB",
-                "to" =>             [],
-                "profitability" =>  14000
+                "from" => "ProjectB",
+                "to" => [],
+                "profitability" => 14000
             ];
 
         $expectedSortedProjects = $sorter->execute($projects);
@@ -99,7 +102,8 @@ class AppTest extends TestCase
     /**
      * @test
      */
-    public function testProjectsWhenTheyStartAtTheSameTime() {
+    public function testProjectsWhenTheyStartAtTheSameTime()
+    {
 
         $sorter = new Sorter();
         $combinator = new GeneratorCombinations();
@@ -112,26 +116,26 @@ class AppTest extends TestCase
 
         $projects = [
             [
-                "id"                =>  "747715fa-7764-46e8-a4a7-0ea7e0534edc",
-                "name"              =>  "ProjectA",
-                "startDate"         =>  1642201100,
-                "endDate"           =>  1642201300,
-                "profitability"     =>  32000
+                "id" => "747715fa-7764-46e8-a4a7-0ea7e0534edc",
+                "name" => "ProjectA",
+                "startDate" => 1642201100,
+                "endDate" => 1642201300,
+                "profitability" => 32000
             ],
             [
-                "id"                =>  "747715fa-7764-46e8-a4a7-0ea7e0534ed1",
-                "name"              =>  "ProjectB",
-                "startDate"         =>  1642201100,
-                "endDate"           =>  1642201300,
-                "profitability"     =>  14000
+                "id" => "747715fa-7764-46e8-a4a7-0ea7e0534ed1",
+                "name" => "ProjectB",
+                "startDate" => 1642201100,
+                "endDate" => 1642201300,
+                "profitability" => 14000
             ]
         ];
 
         $result =
             [
-                "from" =>           "ProjectA",
-                "to" =>             [],
-                "profitability" =>  32000
+                "from" => "ProjectA",
+                "to" => [],
+                "profitability" => 32000
             ];
 
         $expectedSortedProjects = $sorter->execute($projects);
@@ -142,7 +146,8 @@ class AppTest extends TestCase
     /**
      * @test
      */
-    public function testProjectsWhenNoProjects() {
+    public function testProjectsWhenNoProjects()
+    {
 
         $sorter = new Sorter();
         $combinator = new GeneratorCombinations();
