@@ -23,7 +23,6 @@ class Filter extends Task
             $bestSuccessors[] = $bestSuccessor;
 
         }
-        die(var_dump($bestSuccessors));
         return parent::execute($bestSuccessors);
     }
 
