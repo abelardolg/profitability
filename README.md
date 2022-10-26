@@ -8,7 +8,7 @@ It takes several projects with these pieces of information:
   
 and it analyzes what is the best roadmap (combination of projects) to get the best profitability of them.
 ## Constraints:
-  * A project should run per time. Overlapped projects are not allowed.
+  * A project should run per time. Overlapped projects are not considered.
   * When a project finishes a day, another project could run with 100% of the available resources that same day.
 
 ## How to run it:
