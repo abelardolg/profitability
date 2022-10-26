@@ -8,18 +8,18 @@ class Formatter extends Task
 {
     public function execute(array $projects): array
     {
-        $successor = [];
-        if (!empty($projects)) {
-            if (array_key_exists("name", $projects["successor"])) {
-                $successor = $projects["successor"]["name"];
-            }
-            return [
-                "from" => $projects["rootProject"]["name"],
-                "to" => $successor,
-                "profitability" => $projects["maximumProfitability"]
-            ];
-        }
+        if (empty($projects)) return [];
 
-        return [];
+        $successor = [];
+
+        if (array_key_exists("name", $projects["successor"])) {
+            $successor = $projects["successor"]["name"];
+        }
+        return [
+            "from" => $projects["rootProject"]["name"],
+            "to" => $successor,
+            "profitability" => $projects["maximumProfitability"]
+        ];
+
     }
 }

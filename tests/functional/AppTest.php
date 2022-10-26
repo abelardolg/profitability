@@ -68,7 +68,6 @@ class AppTest extends TestCase
 
         $sorter->linkedWith($combinator)->linkedWith($filter)->linkedWith($analyzer)->linkedWith($formatter);
 
-
         $projects = [
             [
                 "id" => "747715fa-7764-46e8-a4a7-0ea7e0534edc",

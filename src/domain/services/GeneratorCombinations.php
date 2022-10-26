@@ -9,15 +9,16 @@ use Profitability\domain\abstractions\Task;
 class GeneratorCombinations extends Task {
 
     public function execute(array $projects): array {
+
+        if (empty($projects)) return parent::execute([]);
+
         $combinations = [];
 
-        if (!empty($projects)) {
-            forEach($projects as $rootProject) {
-                $combinations[] = [
-                    "rootProject" => $rootProject,
-                    "successors" => $this->getProjectsThatRunsAfterOfThisDate($rootProject, $projects)
-                ];
-            }
+        forEach($projects as $rootProject) {
+            $combinations[] = [
+                "rootProject" => $rootProject,
+                "successors" => $this->getProjectsThatRunsAfterOfThisDate($rootProject, $projects)
+            ];
         }
 
         return parent::execute($combinations);

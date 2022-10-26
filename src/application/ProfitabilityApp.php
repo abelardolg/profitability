@@ -15,15 +15,22 @@ use Profitability\infrastructure\data\ProjectDatabase;
 
 $projects = ProjectDatabase::getData();
 
-$sorter = new Sorter();
-$combinator = new GeneratorCombinations();
-$filter = new Filter();
-$analyzer = new Analyzer();
-$formatter = new Formatter();
+$theBestRoadmap = [];
 
-$sorter->linkedWith($combinator)->linkedWith($filter)->linkedWith($analyzer)->linkedWith($formatter);
+if (count($projects) === 1)
+    $theBestRoadmap = $projects[0];
 
-$theBestRoadmap = $sorter->execute($projects);
+if (count($projects) > 1) {
+    $sorter = new Sorter();
+    $combinator = new GeneratorCombinations();
+    $filter = new Filter();
+    $analyzer = new Analyzer();
+    $formatter = new Formatter();
+
+    $sorter->linkedWith($combinator)->linkedWith($filter)->linkedWith($analyzer)->linkedWith($formatter);
+
+    $theBestRoadmap = $sorter->execute($projects);
+}
 
 var_dump($theBestRoadmap);
 
