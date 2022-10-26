@@ -155,6 +155,41 @@ class AppTest extends TestCase
 
         $sorter->linkedWith($combinator)->linkedWith($filter)->linkedWith($analyzer)->linkedWith($formatter);
 
+        $projects = [
+            [
+                "id" => "747715fa-7764-46e8-a4a7-0ea7e0534ed1",
+                "name" => "TheOne",
+                "startDate" => 1642201100,
+                "endDate" => 1642201300,
+                "profitability" => 14000
+            ]
+        ];
+
+        $result = [
+            "from" => "TheOne",
+            "to" => [],
+            "profitability" => 14000
+        ];
+
+        $expectedSortedProjects = $sorter->execute($projects);
+
+        $this->assertEqualsCanonicalizing($expectedSortedProjects, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function testProjectsWhenOneProject()
+    {
+
+        $sorter = new Sorter();
+        $combinator = new GeneratorCombinations();
+        $filter = new Filter();
+        $analyzer = new Analyzer();
+        $formatter = new Formatter();
+
+        $sorter->linkedWith($combinator)->linkedWith($filter)->linkedWith($analyzer)->linkedWith($formatter);
+
         $projects = [];
 
         $result = [];

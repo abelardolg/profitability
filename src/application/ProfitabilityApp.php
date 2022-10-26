@@ -33,4 +33,3 @@ if (count($projects) > 1) {
 }
 
 var_dump($theBestRoadmap);
-
