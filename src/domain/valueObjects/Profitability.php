@@ -46,7 +46,7 @@ class Profitability
     private function setValue(int $value): void
     {
         if (!filter_var($value, FILTER_VALIDATE_INT) || self::POSITIVE_THRESHOLD > $value )
-            throw new ValueNotAllowedException();
+            throw ValueNotAllowedException::fromValue();
 
         $this->value = $value;
     }

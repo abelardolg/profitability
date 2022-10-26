@@ -98,15 +98,15 @@ class Project
      */
     public function setFinish(DateVO $finish): void
     {
-        if ($this->start->getValue() > $this->finish->getValue())
-            throw new DateRangeNotAllowedException();
+        if ($this->start->getValue() > $finish->getValue())
+            throw DateRangeNotAllowedException::fromBadRequest();
 
         $this->finish = $finish;
     }
 
     public function toArray(): array {
         return [
-            "id" => $this->id,
+            "id" => $this->id->getValue(),
             "name" => $this->name->getValue(),
             "startDate" => $this->start->getValue()->getTimestamp(),
             "endDate" => $this->finish->getValue()->getTimestamp(),

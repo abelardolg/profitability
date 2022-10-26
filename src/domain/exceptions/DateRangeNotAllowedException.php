@@ -10,9 +10,12 @@ class DateRangeNotAllowedException extends Exception
 {
     const MESSAGE = "Start date must be before than finish date";
 
-    public function __construct()
+    /**
+     * @throws DateRangeNotAllowedException
+     */
+    public static function fromBadRequest(): self
     {
-        parent::__construct(self::MESSAGE);
+        throw new self(self::MESSAGE);
     }
 
 
