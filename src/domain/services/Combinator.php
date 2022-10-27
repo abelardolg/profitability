@@ -19,8 +19,6 @@ class Combinator extends Task {
             $combinations[$rootProject["id"]] = $rootProject;
         }
 
-//        var_dump($combinations);
-
         return parent::execute($combinations);
     }
 
