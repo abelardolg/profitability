@@ -13,9 +13,6 @@ use Profitability\domain\services\GeneratorSuccessors;
 
 use Profitability\domain\services\SorterByProfitability;
 
-use Profitability\domain\services\Formatter;
-
-
 use Profitability\infrastructure\data\ProjectDatabase;
 
 
