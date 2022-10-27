@@ -48,14 +48,15 @@ class ProjectDatabase
                 StringVO::fromString("UN_DIA_A"),
                 DateVo::fromDate("2022/01/15"),
                 DateVo::fromDate("2022/01/15"),
-                Profitability::fromAmount(38000)
+                Profitability::fromAmount(19000)
             )->toArray(),
             Project::fromProject(
                 StringVO::fromString("UN_DIA_B"),
                 DateVo::fromDate("2022/01/22"),
                 DateVo::fromDate("2022/01/22"),
-                Profitability::fromAmount(18000)
+                Profitability::fromAmount(20000)
             )->toArray()
         ];
     }
+
 }

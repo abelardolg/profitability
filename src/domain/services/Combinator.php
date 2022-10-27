@@ -6,7 +6,7 @@ namespace Profitability\domain\services;
 
 use Profitability\domain\abstractions\Task;
 
-class GeneratorCombinations extends Task {
+class Combinator extends Task {
 
     public function execute(array $projects): array {
 
@@ -15,11 +15,11 @@ class GeneratorCombinations extends Task {
         $combinations = [];
 
         forEach($projects as $rootProject) {
-            $combinations[] = [
-                "rootProject" => $rootProject,
-                "successors" => $this->getProjectsThatRunsAfterOfThisDate($rootProject, $projects)
-            ];
+            $rootProject["successors"] = $this->getProjectsThatRunsAfterOfThisDate($rootProject, $projects);
+            $combinations[$rootProject["id"]] = $rootProject;
         }
+
+//        var_dump($combinations);
 
         return parent::execute($combinations);
     }
@@ -32,7 +32,7 @@ class GeneratorCombinations extends Task {
             if ($project["id"] !== $rootProject["id"] &&
                 $project["startDate"] >= $rootProject["endDate"]
             ) {
-                $projectsAfterOfThisDate[] = $project;
+                $projectsAfterOfThisDate[] = $project["id"];
             }
         }
 

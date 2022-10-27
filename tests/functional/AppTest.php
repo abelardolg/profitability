@@ -4,9 +4,9 @@ namespace functional;
 
 use PHPUnit\Framework\TestCase;
 use Profitability\domain\services\Analyzer;
-use Profitability\domain\services\Filter;
+use Profitability\domain\services\GeneratorSuccessors;
 use Profitability\domain\services\Formatter;
-use Profitability\domain\services\GeneratorCombinations;
+use Profitability\domain\services\Combinator;
 use Profitability\domain\services\Sorter;
 
 class AppTest extends TestCase
@@ -17,8 +17,8 @@ class AppTest extends TestCase
     public function testProjectsWhenBThenA()
     {
         $sorter = new Sorter();
-        $combinator = new GeneratorCombinations();
-        $filter = new Filter();
+        $combinator = new Combinator();
+        $filter = new GeneratorSuccessors();
         $analyzer = new Analyzer();
         $formatter = new Formatter();
 
@@ -61,8 +61,8 @@ class AppTest extends TestCase
     {
 
         $sorter = new Sorter();
-        $combinator = new GeneratorCombinations();
-        $filter = new Filter();
+        $combinator = new Combinator();
+        $filter = new GeneratorSuccessors();
         $analyzer = new Analyzer();
         $formatter = new Formatter();
 
@@ -104,8 +104,8 @@ class AppTest extends TestCase
     {
 
         $sorter = new Sorter();
-        $combinator = new GeneratorCombinations();
-        $filter = new Filter();
+        $combinator = new Combinator();
+        $filter = new GeneratorSuccessors();
         $analyzer = new Analyzer();
         $formatter = new Formatter();
 
@@ -148,8 +148,8 @@ class AppTest extends TestCase
     {
 
         $sorter = new Sorter();
-        $combinator = new GeneratorCombinations();
-        $filter = new Filter();
+        $combinator = new Combinator();
+        $filter = new GeneratorSuccessors();
         $analyzer = new Analyzer();
         $formatter = new Formatter();
 
@@ -183,8 +183,8 @@ class AppTest extends TestCase
     {
 
         $sorter = new Sorter();
-        $combinator = new GeneratorCombinations();
-        $filter = new Filter();
+        $combinator = new Combinator();
+        $filter = new GeneratorSuccessors();
         $analyzer = new Analyzer();
         $formatter = new Formatter();
 
