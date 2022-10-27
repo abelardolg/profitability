@@ -3,11 +3,10 @@
 namespace functional;
 
 use PHPUnit\Framework\TestCase;
-use Profitability\domain\services\Analyzer;
-use Profitability\domain\services\GeneratorSuccessors;
-use Profitability\domain\services\Formatter;
 use Profitability\domain\services\Combinator;
-use Profitability\domain\services\Sorter;
+use Profitability\domain\services\GeneratorSuccessors;
+use Profitability\domain\services\SorterByProfitability;
+use Profitability\domain\services\SorterByStartDateThenEndDate;
 
 class AppTest extends TestCase
 {
@@ -16,13 +15,13 @@ class AppTest extends TestCase
      */
     public function testProjectsWhenBThenA()
     {
-        $sorter = new Sorter();
+        $sorterByStartDateThenEndDate = new SorterByStartDateThenEndDate();
         $combinator = new Combinator();
-        $filter = new GeneratorSuccessors();
-        $analyzer = new Analyzer();
-        $formatter = new Formatter();
+        $generatorSuccessors = new GeneratorSuccessors();
+        $sorterByProfitability = new SorterByProfitability();
 
-        $sorter->linkedWith($combinator)->linkedWith($filter)->linkedWith($analyzer)->linkedWith($formatter);
+        $sorterByStartDateThenEndDate->linkedWith($combinator)->linkedWith($generatorSuccessors)
+            ->linkedWith($sorterByProfitability);
 
 
         $projects = [
@@ -44,14 +43,13 @@ class AppTest extends TestCase
 
         $result =
             [
-                "from" => "ProjectB",
-                "to" => "ProjectA",
+                "id" => "747715fa-7764-46e8-a4a7-0ea7e0534ed1,747715fa-7764-46e8-a4a7-0ea7e0534edc",
                 "profitability" => 28000
             ];
 
-        $expectedSortedProjects = $sorter->execute($projects);
+        $theBestRoadmap = $sorterByStartDateThenEndDate->execute($projects);
 
-        $this->assertEqualsCanonicalizing($expectedSortedProjects, $result);
+        $this->assertEqualsCanonicalizing($theBestRoadmap, $result);
     }
 
     /**
@@ -60,13 +58,13 @@ class AppTest extends TestCase
     public function testProjectsWhenOverlappingProjects()
     {
 
-        $sorter = new Sorter();
+        $sorterByStartDateThenEndDate = new SorterByStartDateThenEndDate();
         $combinator = new Combinator();
-        $filter = new GeneratorSuccessors();
-        $analyzer = new Analyzer();
-        $formatter = new Formatter();
+        $generatorSuccessors = new GeneratorSuccessors();
+        $sorterByProfitability = new SorterByProfitability();
 
-        $sorter->linkedWith($combinator)->linkedWith($filter)->linkedWith($analyzer)->linkedWith($formatter);
+        $sorterByStartDateThenEndDate->linkedWith($combinator)->linkedWith($generatorSuccessors)
+            ->linkedWith($sorterByProfitability);
 
         $projects = [
             [
@@ -87,14 +85,13 @@ class AppTest extends TestCase
 
         $result =
             [
-                "from" => "ProjectB",
-                "to" => [],
+                "id" => "747715fa-7764-46e8-a4a7-0ea7e0534ed1",
                 "profitability" => 14000
             ];
 
-        $expectedSortedProjects = $sorter->execute($projects);
+        $theBestRoadmap = $sorterByStartDateThenEndDate->execute($projects);
 
-        $this->assertEqualsCanonicalizing($expectedSortedProjects, $result);
+        $this->assertEqualsCanonicalizing($theBestRoadmap, $result);
     }
 
     /**
@@ -103,14 +100,13 @@ class AppTest extends TestCase
     public function testProjectsWhenTheyStartAtTheSameTime()
     {
 
-        $sorter = new Sorter();
+        $sorterByStartDateThenEndDate = new SorterByStartDateThenEndDate();
         $combinator = new Combinator();
-        $filter = new GeneratorSuccessors();
-        $analyzer = new Analyzer();
-        $formatter = new Formatter();
+        $generatorSuccessors = new GeneratorSuccessors();
+        $sorterByProfitability = new SorterByProfitability();
 
-        $sorter->linkedWith($combinator)->linkedWith($filter)->linkedWith($analyzer)->linkedWith($formatter);
-
+        $sorterByStartDateThenEndDate->linkedWith($combinator)->linkedWith($generatorSuccessors)
+            ->linkedWith($sorterByProfitability);
 
         $projects = [
             [
@@ -131,29 +127,28 @@ class AppTest extends TestCase
 
         $result =
             [
-                "from" => "ProjectA",
-                "to" => [],
+                "id" => "747715fa-7764-46e8-a4a7-0ea7e0534edc",
                 "profitability" => 32000
             ];
 
-        $expectedSortedProjects = $sorter->execute($projects);
+        $theBestRoadmap = $sorterByStartDateThenEndDate->execute($projects);
 
-        $this->assertEqualsCanonicalizing($expectedSortedProjects, $result);
+        $this->assertEqualsCanonicalizing($theBestRoadmap, $result);
     }
 
     /**
      * @test
      */
-    public function testProjectsWhenNoProjects()
+    public function testProjectsWhenOnlyAProject()
     {
 
-        $sorter = new Sorter();
+        $sorterByStartDateThenEndDate = new SorterByStartDateThenEndDate();
         $combinator = new Combinator();
-        $filter = new GeneratorSuccessors();
-        $analyzer = new Analyzer();
-        $formatter = new Formatter();
+        $generatorSuccessors = new GeneratorSuccessors();
+        $sorterByProfitability = new SorterByProfitability();
 
-        $sorter->linkedWith($combinator)->linkedWith($filter)->linkedWith($analyzer)->linkedWith($formatter);
+        $sorterByStartDateThenEndDate->linkedWith($combinator)->linkedWith($generatorSuccessors)
+            ->linkedWith($sorterByProfitability);
 
         $projects = [
             [
@@ -166,37 +161,36 @@ class AppTest extends TestCase
         ];
 
         $result = [
-            "from" => "TheOne",
-            "to" => [],
+            "id" => "747715fa-7764-46e8-a4a7-0ea7e0534ed1",
             "profitability" => 14000
         ];
 
-        $expectedSortedProjects = $sorter->execute($projects);
+        $theBestRoadmap = $sorterByStartDateThenEndDate->execute($projects);
 
-        $this->assertEqualsCanonicalizing($expectedSortedProjects, $result);
+        $this->assertEqualsCanonicalizing($theBestRoadmap, $result);
     }
 
     /**
      * @test
      */
-    public function testProjectsWhenOneProject()
+    public function testProjectsWhenNoProjects()
     {
 
-        $sorter = new Sorter();
+        $sorterByStartDateThenEndDate = new SorterByStartDateThenEndDate();
         $combinator = new Combinator();
-        $filter = new GeneratorSuccessors();
-        $analyzer = new Analyzer();
-        $formatter = new Formatter();
+        $generatorSuccessors = new GeneratorSuccessors();
+        $sorterByProfitability = new SorterByProfitability();
 
-        $sorter->linkedWith($combinator)->linkedWith($filter)->linkedWith($analyzer)->linkedWith($formatter);
+        $sorterByStartDateThenEndDate->linkedWith($combinator)->linkedWith($generatorSuccessors)
+            ->linkedWith($sorterByProfitability);
 
         $projects = [];
 
         $result = [];
 
-        $expectedSortedProjects = $sorter->execute($projects);
+        $theBestRoadmap = $sorterByStartDateThenEndDate->execute($projects);
 
-        $this->assertEqualsCanonicalizing($expectedSortedProjects, $result);
+        $this->assertEqualsCanonicalizing($theBestRoadmap, $result);
     }
 
 }
