@@ -54,14 +54,13 @@ class Profitability {
     private function formatter(array $projects, array $theBestRoadmap): void
     {
         $projectNamesIds = array_column($projects, "name", "id");
-        var_dump($projectNamesIds);
         $theBestProjects = explode(",", $theBestRoadmap["id"]);
+
         echo "The best roadmap is:\n";
         forEach($theBestProjects as $theBestProject) {
             echo $projectNamesIds[$theBestProject] . "\n";
         }
         echo "with " . $theBestRoadmap["profitability"] . "€ of profitability\n";
-
     }
 }
 
