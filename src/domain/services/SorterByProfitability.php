@@ -10,7 +10,6 @@ class SorterByProfitability extends Task
         if (!empty($projects)) {
             usort($projects, array($this, "sortByProfitability"));
         }
-
         return $projects[0];
     }
 

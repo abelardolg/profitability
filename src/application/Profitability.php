@@ -32,8 +32,12 @@ class Profitability {
 
         $theBestRoadmap = [];
 
-        if (count($projects) === 1)
-            $theBestRoadmap = $projects[0];
+        if (count($projects) === 1) {
+            $theBestRoadmap = [
+                "id" => $projects[0]["id"],
+                "profitability" => $projects[0]["profitability"]
+            ];
+        }
 
         if (count($projects) > 1) {
             $sorterByStartDateThenEndDate = new SorterByStartDateThenEndDate();
@@ -46,8 +50,11 @@ class Profitability {
 
             $theBestRoadmap = $sorterByStartDateThenEndDate->execute($projects);
 
-            $this->formatter($projects, $theBestRoadmap);
         }
+
+        if (count($theBestRoadmap) === 0) die("No projects found!");
+
+        $this->formatter($projects, $theBestRoadmap);
 
     }
 
